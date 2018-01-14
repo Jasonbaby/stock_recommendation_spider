@@ -67,6 +67,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    # 'testscrapy.pipelines.TestscrapyPipeline': 300,
     'testscrapy.pipelines.TestscrapyPipeline': 300,
+    'testscrapy.pipelines.THSPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

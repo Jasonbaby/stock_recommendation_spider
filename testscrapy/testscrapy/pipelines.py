@@ -4,23 +4,46 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import sqlite3
+
 import csv
-import time
 class TestscrapyPipeline(object):
     def open_spider(self,spider):
-        self.all_num = 0
-        self.out = open('D:\live_data.csv', 'w', newline='')
-        self.csv_write = csv.writer(self.out, dialect='excel')
-        return
+        if(spider.name == 'sina'):
+            self.all_num = 0
+            self.out = open('D:\SINA_data.csv', 'w', newline='')
+            self.csv_write = csv.writer(self.out, dialect='excel')
+            self.csv_write.writerows([['id','question time','question','answer time','answer']])
+            return
 
 
     def process_item(self, item, spider):
+        if (spider.name != "sina"):
+            return item
         self.csv_write.writerows([[item['id'], item['q_timestamp'], item['question'], item['a_timestamp'], item['answer'] ]])
         self.all_num += 1
-        return item
 
 
     def spider_close(self, spider):
-        self.out.close()
-        print(self.all_num)
+        if (spider.name == 'sina'):
+            self.out.close()
+            print(self.all_num)
+
+
+class THSPipeline(object):
+    def open_spider(self,spider):
+        if (spider.name == 'ths'):
+            self.all_num = 0
+            self.out = open('D:\THS_data.csv', 'w', newline='')
+            self.csv_write = csv.writer(self.out, dialect='excel')
+            self.csv_write.writerows([['id','time','title','text']])
+
+
+    def process_item(self, item, spider):
+        if (spider.name == "ths" ):
+            self.csv_write.writerows([[item['id'], item['time'], item['title'], item['text']]])
+
+
+    def spider_close(self, spider):
+        if (spider.name == 'ths'):
+            self.out.close()
+            print(self.all_num)
