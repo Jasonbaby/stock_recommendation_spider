@@ -9,7 +9,11 @@ python 3.6 + scrapy 1.5.0
 
 数据包括: 
 1. 博主的id，名称，关注的数量，获赞数量，访问数量
+
+![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCEf6a3cd49456425b72861c0c598da487d/2231)
 2. 博主的id，提问时间，提问内容，回答时间，回答内容
+
+![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCE83669c2588988c427898f1fb5ae65770/2233)
 
 同花顺同顺号，所有主播的文章。网站内容可见：http://master.10jqka.com.cn/master_list.shtml
 
