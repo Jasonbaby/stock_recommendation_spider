@@ -69,21 +69,26 @@ class SinaSpider(scrapy.Spider):
     def parse_blogger(self,response):
         data = response.body
         text = data.decode('unicode_escape').replace('\\','')
-        id_tem = re.findall(r"\"uid\":\"(\d+?)\",\"name", text)
-        name = re.findall(r"\"name\":\"(.+?)\",", text)
-        follow_num_tem = re.findall(r"\"follow_num\":(\d+?),", text)
-        like_num_tem = re.findall(r"\"like_num\":\"(\d+?)\"", text)
-        view_num_tem = re.findall(r"\"view_num\":\"(\d+?)\",\"col", text)
-        self.data += zip(id_tem, name, follow_num_tem, like_num_tem, view_num_tem)
-        if(len(id_tem) > 0):
+        blocks = re.findall(r"\"id\":\"(.+?)follow_status", text)
+        for block  in blocks :
+            if(block == ""):
+                continue
+            id_tem = re.findall(r"\"uid\":\"(\d+?)\",\"name", block)
+            name = re.findall(r"\"name\":\"(.+?)\",", block)
+            follow_num_tem = re.findall(r"\"follow_num\":(\d+?),", block)
+            like_num_tem = re.findall(r"\"like_num\":\"(\d+?)\"", block)
+            view_num_tem = re.findall(r"\"view_num\":\"(\d+?)\",\"col", block)
+            signature = re.findall(r"\"signature_long\":\"(.+?)\"", block)
             self.id += id_tem
+            self.data += [id_tem + name + follow_num_tem + like_num_tem + view_num_tem + signature]
+        if(len(blocks) > 0):
             self.url_num += 1
             next_url = self.url_head + str(self.url_num) + self.url_last
             yield Request(next_url, callback=self.parse_blogger)
         else:
             csvfile = open('D:\SINA_BLOGGER.csv', 'w', newline='')
             writer = csv.writer(csvfile)
-            writer.writerow(['id','name','follow num', 'like num', 'view num'])
+            writer.writerow(['id','name','follow num', 'like num', 'view num', 'signature'])
             for data in self.data:
                 writer.writerow(data)
             csvfile.close()
