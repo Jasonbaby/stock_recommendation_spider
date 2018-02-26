@@ -10,14 +10,14 @@ def get_all_stocks_index():
     all_stock = df.index.tolist()   
     return all_stock
 
-def get_data(code = '000001', min = "D", start = '20150101', end = '20200101'): #min = "5min"
+def get_data(code = '000001', min = "5min", start = '20150101', end = '20200101'): #min = "5min"
     df = ts.bar(code, conn=ts.get_apis(), freq=min, start_date = start, end_date = end)
     return df
 
 if __name__ == "__main__":
     all_stock_list = get_all_stocks_index()
     data_save_path = "data/"
-    for stock in all_stock_list:
+    for stock in all_stock_list[0:5]:
         print('reading data from ' + stock)
         df = get_data(code = stock)
         save_path = os.path.join(data_save_path, stock + '.csv')
