@@ -8,4 +8,4 @@
 - 对于未登录词，采用了基于汉字成词能力的 HMM 模型，使用了 Viterbi 算法
 
 ### 效果
-![image](https://note.youdao.com/yws/res/2258/WEBRESOURCE9f58c71f3bb94c4dfda97735351a1d0b)
+![image](https://note.youdao.com/yws/public/resource/0882535f1a2cd291ea2a63d5fc68e619/WEBRESOURCE9f58c71f3bb94c4dfda97735351a1d0b)
