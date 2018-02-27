@@ -7,12 +7,10 @@ import pandas as pd
 import numpy as np
 from wordcloud import WordCloud
 
-
+# 统计词频
 def wordcount(str):
     # 文章字符串前期处理
-    seg_list = jieba.cut(text, cut_all=False) 
-    words_split = " ".join(seg_list)
-    strl_ist = words_split.split(' ')
+    strl_ist = jieba.lcut(text, cut_all=True) 
     count_dict = {}
     all_num = 0;
     # 如果字典里有该单词则加1，否则添加入字典
@@ -31,19 +29,23 @@ def wordcount(str):
 
 
 data = pd.read_csv('SINA_BLOGGER.csv',encoding='gbk')
+# 对博主的个人签名进行分析
 signature = data.ix[:,'signature']
-signature = signature.dropna(how = 'any')
-signature = signature.values.tolist()
+signature = signature.dropna(how = 'any').values.tolist()
 text = "";
 for t in signature :
     text = text + t;
-seg_list = jieba.cut(text, cut_all=False) 
-words_split = " ".join(seg_list)
+# 关键词抽取
 analyze = jieba.analyse.extract_tags(text, topK=20, withWeight=False, allowPOS=())
 analyze_split = " ".join(analyze)
 lists = analyze_split.split(' ')
 print(lists)
-
+# 统计词频和各自出现的数量
+namelist, all_num = wordcount(text)
+print(namelist[0:20], all_num)
+# wordcloud可视化展示
+seg_list = jieba.cut(text, cut_all=True) 
+words_split = " ".join(seg_list)
 wc = WordCloud(font_path="simhei.ttf", max_words = 50, background_color = 'white', width = 800, height = 500)    
 my_wordcloud = wc.generate(words_split)
 plt.imshow(my_wordcloud)
