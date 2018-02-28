@@ -11,7 +11,7 @@
 #### sina_blogger.py 
 对新浪财经的博主的个性签名进行词频统计并制作成词云
 
-![image](https://note.youdao.com/yws/public/resource/0882535f1a2cd291ea2a63d5fc68e619/WEBRESOURCE9f58c71f3bb94c4dfda97735351a1d0b)
+![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCE9f58c71f3bb94c4dfda97735351a1d0b/2258)
 
 #### sina_comment.py 
 对所有主播直播间的提问和回答进行词频统计并制作成词云
@@ -20,4 +20,4 @@
 ![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCEcaef8ea18a0f3646cfa30ba2c6db2e9b/2275)
 
 #### blogger_comment.py
-分别对所有主播的提问和回答进行词频统计，并将得到的高频词保存下来，丰富主播的信息
+分别对所有主播的提问和回答进行词频统计，将提问和回答中的高频词保存到对应主播的个人信息中，便于接下来的研究分析
