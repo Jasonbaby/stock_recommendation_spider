@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://G:/ricequant/.idea/ricequant.iml" filepath="G:/ricequant/.idea/ricequant.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/testscrapy.iml" filepath="$PROJECT_DIR$/.idea/testscrapy.iml" />
     </modules>
   </component>

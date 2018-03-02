@@ -32,6 +32,9 @@ class THSSpider(scrapy.Spider):
         except:
             current_blogger = ""
         item = THS_BLOG()
+        title = response.xpath("//div[@class='main article']/h2/text()").extract()
+        if(len(title) == 0):
+            return
         title = response.xpath("//div[@class='main article']/h2/text()").extract()[0]
         time =  response.xpath("//div[@class='time']/span[1]/text()").extract()[0]
         text = response.xpath("//div[@class='article-con']")[0].xpath('string(.)').extract()[0]
@@ -53,8 +56,9 @@ class THSSpider(scrapy.Spider):
         paper_address = response.xpath("//div[@class='listTit clearfix']/a/@href").extract()
         for address in paper_address:
             yield Request(address, callback=self.parse_detail, meta={'id': id})
-        next_url = self.paper_url_1 + str(id) + self.paper_url_2 + str(current_page + 1) + self.paper_url_3
-        yield Request(next_url, callback=self.parse_paper, meta={'id': id, 'count': (current_page+1)})
+        if(len(paper_address) > 0):
+            next_url = self.paper_url_1 + str(id) + self.paper_url_2 + str(current_page + 1) + self.paper_url_3
+            yield Request(next_url, callback=self.parse_paper, meta={'id': id, 'count': (current_page+1)})
 
 
     def parse_blogger(self,response):

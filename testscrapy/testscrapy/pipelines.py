@@ -41,6 +41,9 @@ class THSPipeline(object):
     def process_item(self, item, spider):
         if (spider.name == "ths" ):
             self.csv_write.writerows([[item['id'], item['time'], item['title'], item['text']]])
+            self.all_num += 1
+            if(self.all_num % 100 == 0):
+                print('The recent number:',self.all_num)
 
 
     def spider_close(self, spider):
