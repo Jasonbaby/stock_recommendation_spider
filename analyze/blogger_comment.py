@@ -69,5 +69,5 @@ for ids in id_list:
     blogger.at[pos,'question number'] = len(question)
     blogger.at[pos,'answer abstract'] = ','.join(a_result_list)
     blogger.at[pos,'answer number'] = len(answer)
-
 blogger.to_csv('detailed_blogger.csv', encoding="utf_8_sig")
+

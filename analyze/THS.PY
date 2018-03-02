@@ -48,6 +48,33 @@ def analyze(text_list):
     count_list, all_num = wordcount(text)
     return result_list, count_list, all_num
 
+def generate_wordcloud(data):
+    #制作词云
+    title_list = data['title'].dropna(how = 'any').values
+    article_list = data['text'].dropna(how = 'any').values
+    title_text = ""
+    article_text = ""
+    for t in title_list:
+        title_text += t
+    for a in article_list:
+        article_text += a 
+
+    title_words = " ".join(jieba.cut(title_text, cut_all=False) )
+    title_wc = WordCloud(font_path="simhei.ttf", max_words = 50, background_color = 'white', width = 800, height = 500)    
+    title_wordcloud = title_wc.generate(title_words)
+    plt.imshow(title_wordcloud)
+    plt.axis("off")
+    plt.title('WordCloud of title text')
+    plt.show()
+
+    article_words = " ".join(jieba.cut(article_text, cut_all=False) )
+    article_wc = WordCloud(font_path="simhei.ttf", max_words = 50, background_color = 'white', width = 800, height = 500)    
+    article_wordcloud = article_wc.generate(article_words)
+    plt.imshow(article_wordcloud)
+    plt.axis("off")
+    plt.title('WordCloud of article text')
+    plt.show()
+
 prepare()
 blogger = pd.read_csv('THS_BLOGGER.csv',encoding='gbk').dropna(how = 'any')
 blogger['title abstract'] = None
@@ -69,3 +96,5 @@ for ids in id_list:
     blogger.at[pos,'article number'] = len(text)
 
 blogger.to_csv('detailed_THS_blogger.csv', encoding="utf_8_sig")
+
+generate_wordcloud(data)
