@@ -82,8 +82,7 @@ blogger['article number'] = 0
 blogger['article abstract'] = None
 data = pd.read_csv('THS_data.csv',encoding='gbk')
 id_list = list(set(data['id'].values))
-generate_wordcloud(data)
-exit()
+print('generating frequent words...')
 for ids in id_list:
     TemData = data[data.id == ids]
     # 标题
@@ -98,4 +97,6 @@ for ids in id_list:
     blogger.at[pos,'article number'] = len(text)
 
 blogger.to_csv('detailed_THS_blogger.csv', encoding="utf_8_sig")
+print('generating WordCloud...')
+generate_wordcloud(data)
 
