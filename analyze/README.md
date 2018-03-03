@@ -20,5 +20,8 @@
 ![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCEb031d3748cf534eb284bb7a5161b0ce2/2277)
 ![image](https://note.youdao.com/yws/public/resource/5b1e49db8425a9748610af71880bbcbc/xmlnote/WEBRESOURCEcaef8ea18a0f3646cfa30ba2c6db2e9b/2275)
 
-#### blogger_comment.py
+#### sina.py
 分别对所有主播的提问和回答进行词频统计，将提问和回答中的高频词保存到对应主播的个人信息中，便于接下来的研究分析
+
+### THS.py
+分别对同花顺里所有主播的文章标题、内容进行词频统计，并将高频词保存到对应主播的个人信息中，便于接下来的研究分析； 生成标题、内容的词云
