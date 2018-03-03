@@ -99,3 +99,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+analyze/THS_BLOGGER.csv
