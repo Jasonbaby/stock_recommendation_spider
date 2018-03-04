@@ -81,6 +81,21 @@ blogger['title abstract'] = None
 blogger['article number'] = 0
 blogger['article abstract'] = None
 data = pd.read_csv('THS_data.csv',encoding='gbk')
+
+title_list = data['title'].dropna(how = 'any').values
+text_list = data['text'].dropna(how = 'any').values
+title_text = ''
+text_text = ''
+for t in title_list:
+    title_text += t
+for t in text_list:
+    text_text += t
+
+title_words = " ".join(jieba.analyse.extract_tags(title_text, topK=50, withWeight=False, allowPOS=())).split(' ')
+print(title_words)
+text_words = " ".join(jieba.analyse.extract_tags(text_text, topK=50, withWeight=False, allowPOS=())).split(' ')
+print(text_words)
+exit()
 id_list = list(set(data['id'].values))
 print('generating frequent words...')
 for ids in id_list:
@@ -98,5 +113,5 @@ for ids in id_list:
 
 blogger.to_csv('detailed_THS_blogger.csv', encoding="utf_8_sig")
 print('generating WordCloud...')
-generate_wordcloud(data)
+# generate_wordcloud(data)
 
