@@ -26,7 +26,15 @@ def wordcount(str):
     #按照词频从高到低排列
     count_list=sorted(count_dict.items(),key=lambda x:x[1],reverse=True)
     return count_list, all_num
-
+def wordcloud(text):
+    # wordcloud可视化展示
+    seg_list = jieba.cut(text, cut_all=True) 
+    words_split = " ".join(seg_list)
+    wc = WordCloud(font_path="simhei.ttf", max_words = 50, background_color = 'white', width = 800, height = 500)    
+    my_wordcloud = wc.generate(words_split)
+    plt.imshow(my_wordcloud)
+    plt.axis("off")
+    plt.show()
 
 data = pd.read_csv('SINA_BLOGGER.csv',encoding='gbk')
 # 对博主的个人签名进行分析
@@ -36,19 +44,12 @@ text = "";
 for t in signature :
     text = text + t;
 # 关键词抽取
-analyze = jieba.analyse.extract_tags(text, topK=20, withWeight=False, allowPOS=())
+analyze = jieba.analyse.extract_tags(text, topK=50, withWeight=False, allowPOS=())
 analyze_split = " ".join(analyze)
 lists = analyze_split.split(' ')
 print(lists)
 # 统计词频和各自出现的数量
 namelist, all_num = wordcount(text)
-print(namelist[0:20], all_num)
-# wordcloud可视化展示
-seg_list = jieba.cut(text, cut_all=True) 
-words_split = " ".join(seg_list)
-wc = WordCloud(font_path="simhei.ttf", max_words = 50, background_color = 'white', width = 800, height = 500)    
-my_wordcloud = wc.generate(words_split)
-plt.imshow(my_wordcloud)
-plt.axis("off")
-plt.show()
+print(namelist[0:50], all_num)
+# wordcloud(text)
 
