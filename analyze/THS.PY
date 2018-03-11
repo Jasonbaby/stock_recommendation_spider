@@ -6,6 +6,8 @@ import jieba.analyse
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
+remove_word = ['10', '12', '11', '50', '20']
+
 # 得到所有股票的代码和中文名字，将其作为新词录入词典
 def prepare():
     df = ts.get_stock_basics()
@@ -90,6 +92,13 @@ for t in title_list:
     title_text += t
 for t in text_list:
     text_text += t
+
+#title_word_list, title_all_num = wordcount(title_text)
+text_word_list, text_all_num =  wordcount(text_text)
+
+#print(title_word_list[0:100], title_all_num)
+print(text_word_list[0:100])
+exit()
 
 title_words = " ".join(jieba.analyse.extract_tags(title_text, topK=50, withWeight=False, allowPOS=())).split(' ')
 print(title_words)
