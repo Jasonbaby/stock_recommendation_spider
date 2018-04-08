@@ -19,14 +19,20 @@ text_frequent = ['当天出现的文章','公司','市场', '投资', '中国', 
 
 market_col = ['后五日涨跌幅','后十日涨跌幅','前五日涨跌幅','前十日涨跌幅','volume','p_change']
 
-data = pd.read_csv('result/sh_text_analyze.csv',encoding='gbk')
-data = data[data.当天出现的文章 > 100]
 
-select_data = data.loc[:,word_col + market_col]
+file_list = ['cyb_text_analyze.csv','hs300_text_analyze.csv','sh_text_analyze.csv','sz_text_analyze.csv','sz50_text_analyze.csv','zxb_text_analyze.csv']
 
-for market_data in market_col:
-    for word in text_frequent:
-        select_data = data.loc[:,[market_data,word]]
-        cor = select_data.corr().iloc[0,1]
-        if(abs(cor) > 0.2):
-            print('|',word,'|',market_data,'|',cor)
+for file in file_list:
+    market = file.split('_')[0]
+    # fin = open('corr/' + file)
+    data = pd.read_csv('result/'+file,encoding='gbk')
+    data = data[data.当天出现的文章 > 100]
+
+    select_data = data.loc[:,word_col + market_col]
+
+    for market_data in market_col:
+        for word in text_frequent:
+            select_data = data.loc[:,[market_data,word]]
+            cor = select_data.corr().iloc[0,1]
+            if(abs(cor) > 0.2):
+                print(market,'|',word,'|',market_data,'|',cor)
